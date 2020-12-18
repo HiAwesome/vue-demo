@@ -12,6 +12,21 @@
     {{a}}
 </div>
 
+<p></p>
+
+<div id="app2">
+    <p>{{newTodoText}}</p>
+    <p>{{visitCount}}</p>
+    <p>{{hideCompletedTodos}}</p>
+    <p>{{todos}}</p>
+    <p>{{error}}</p>
+</div>
+
+<p></p>
+
+<div id="app3">
+    {{foo}}
+</div>
 
 <script type="text/javascript">
     // 数据与方法
@@ -40,6 +55,30 @@
     vm.a // => 3
 
     vm.b = 'hi'
+
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            newTodoText: '',
+            visitCount: 0,
+            hideCompletedTodos: false,
+            todos: [],
+            error: null
+        }
+    })
+
+    vm2.hideCompletedTodos = true
+    vm2.todos = ['v', 'u', 'e']
+
+    var obj = {foo: 'bar'}
+    // freeze 会阻止修改现有的 property，也意味着响应系统无法再追踪变化
+    Object.freeze(obj)
+
+    var vm3 = new Vue({
+        el: '#app3',
+        data: obj
+    })
+    obj = {foo: '99999'}
 
 </script>
 </body>
