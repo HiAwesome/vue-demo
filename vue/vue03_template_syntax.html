@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Template Syntax</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<!-- 插值 -->
+<body>
+<div id="app">
+    <!-- 文本 -->
+    <p>
+        <span>Message: {{msg}}</span>
+    </p>
+    <p>
+        <!-- v-once 执行一次性插值，数据改变时插值处的内容不会更新 -->
+        <span v-once>Message not Change: {{msg}}</span>
+    </p>
+
+    <p></p>
+
+    <!-- 原始 HTML -->
+    <p>Using mustaches: {{ rawHtml }}</p>
+    <p>Using v-html directive:<span v-html="rawHtml"></span></p>
+
+    <!-- Attribute -->
+    <div v-bind:id="dynamicId">test...</div>
+    <button v-bind:disabled="isButtonDisabled">Button...</button>
+
+    <!-- 使用 JavaScript 表达式 -->
+    <p>{{ number + 1 }}</p>
+    <p>{{ 1 === 1 ? 'YES' : 'NO'}}</p>
+    <p>{{ message.split('').reverse().join('') }}</p>
+
+    <!-- 使用 JavaScript 表达式不会生效的例子 -->
+    <!-- 这是语句，不是表达式 -->
+    <!-- {{ var a = 1}} -->
+    <!-- 流控制也不会生效，请使用三元表达式 -->
+    <!-- {{ if (ok) {return message }}} -->
+
+    <!-- 指令 -->
+    <p v-if="seen">现在你看到我了</p>
+
+    <!-- 指令参数 -->
+    <p>
+        <a v-bind:href="url">...</a>
+    </p>
+    <p>
+        <a v-on:click="doSomething">点击新窗口打开主页</a>
+    </p>
+
+    <!-- 动态参数 -->
+    <p>
+        <a v-bind:[attribute_name]="url">动态参数，直接到 Google</a>
+    </p>
+    <p>
+        <a v-on:[event_name]="doSomething">动态参数，点击新窗口打开主页</a>
+    </p>
+    <!--
+        对动态参数的值的约束：
+        1. 异常情况下为 null，会移除绑定
+        2. 空格和引号放在 HTML attribute 名里是无效的
+        3. 在 DOM 中使用模板时，避免使用大写字母来命名键名，因为浏览器会把 attribute 名全部强制转换为小写
+    -->
+
+    <!-- 修饰符 -->
+    <!-- .prevent 修饰符告诉 v-on 指令对于触发的事件调用 event.preventDefault() -->
+    <p>
+        <a>
+            <form v-on:click.prevent="onSubmit">Submit Prevent</form>
+        </a>
+    </p>
+
+    <!-- 缩写 -->
+    <!-- v-bind -> 空， v-on -> @ -->
+    <!-- v-bind 完整语法、缩写、动态参数的缩写 -->
+    <p>
+        <a v-bind:href="url">v-bind 完整语法</a>
+    </p>
+    <p>
+        <a :href="url">v-bind 缩写</a>
+    </p>
+    <p>
+        <a :[attribute_name]="url">v-bind 动态参数的缩写</a>
+    </p>
+
+    <!-- v-on 完整语法、缩写、动态参数的缩写 -->
+    <p>
+        <a v-on:click="doSomething">v-on 完整语法</a>
+    </p>
+    <p>
+        <a @click="doSomething">v-on 缩写</a>
+    </p>
+    <p>
+        <a @[event_name]="doSomething">v-on 动态参数的缩写</a>
+    </p>
+    <p></p>
+
+</div>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue',
+            rawHtml: '<span style="color:red">this is should be red</span>',
+            color: 'blue',
+            number: 10,
+            ok: 1,
+            message: 'vue',
+            dynamicId: true,
+            isButtonDisabled: false,
+            seen: true,
+            url: 'https://www.google.com',
+            attribute_name: 'href',
+            event_name: 'click'
+        },
+        methods: {
+            doSomething: function () {
+                window.open('../index.html')
+            },
+            onSubmit: function () {
+                alert("提交触发成功")
+            }
+        }
+    })
+
+    vm.msg = '1000'
+</script>
+<style type="text/css">
+    .red {
+        color: red;
+    }
+
+    .blue {
+        color: blue;
+        font-size: 100px;
+    }
+</style>
+</body>
+</html>
