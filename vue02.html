@@ -62,6 +62,16 @@
 
     vm.b = 'hi'
 
+    vm.$data === data // => true
+    vm.$el === document.getElementById('app1') // => true
+
+    // $watch 是一个实例方法
+    vm.$watch('a', function (newValue, oldValue) {
+        // 这个回调将在 vm.a 改变后调用
+        // 控制台打印两个值
+        console.log('oldValue: ' + oldValue, 'newValue: ' + newValue)
+    })
+
     var vm2 = new Vue({
         el: '#app2',
         data: {
