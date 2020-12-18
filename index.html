@@ -3,9 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>hello vue</title>
+    <!-- 安装 vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+
+<!-- 声明式渲染 -->
 <div id="app">
     {{ message }}
     {{ name }}
@@ -21,6 +24,7 @@
 
 <p></p>
 
+<!-- 条件与循环 -->
 <div id="app-3">
     <p v-if="seen">现在你看到我了</p>
 </div>
@@ -34,6 +38,12 @@
         </li>
     </ol>
 </div>
+
+
+
+
+
+
 <script type="text/javascript">
     var app = new Vue({
         el: '#app',
