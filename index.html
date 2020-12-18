@@ -10,12 +10,30 @@
     {{ message }}
     {{ name }}
 </div>
+
+<p></p>
+
 <div id="app-2">
     <span v-bind:title="message">
         鼠标悬停几秒钟查看此处动态绑定的提示信息！
     </span>
 </div>
 
+<p></p>
+
+<div id="app-3">
+    <p v-if="seen">现在你看到我了</p>
+</div>
+
+<p></p>
+
+<div id="app-4">
+    <ol>
+        <li v-for="todo in todos">
+            {{ todo.text }}
+        </li>
+    </ol>
+</div>
 <script type="text/javascript">
     var app = new Vue({
         el: '#app',
@@ -29,6 +47,24 @@
         el: '#app-2',
         data: {
             message: '页面加载于 ' + new Date().toLocaleString()
+        }
+    });
+
+    var app3 = new Vue({
+        el: '#app-3',
+        data: {
+            seen: true
+        }
+    });
+
+    var app4 = new Vue({
+        el: '#app-4',
+        data: {
+            todos: [
+                {text: 'learn js'},
+                {text: 'learn vue'},
+                {text: 'learn front'}
+            ]
         }
     })
 </script>
