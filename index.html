@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-	<head>
-		<meta charset="utf-8">
-		<title>hello vue</title>
-		<script src="vue.js" type="text/javascript" charset="UTF-8"></script>
-	</head>
-	<body>
-		<div id="app">
-			{{ message }} 
-			{{ name }}
-		</div>
-		
-		<script type="text/javascript">
-			var app = new Vue({
-				el: '#app',
-				data: {
-					message: 'Hello Vue!',
-					name: 'moqi'
-				}
-			});
-		</script>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <title>hello vue</title>
+    <script src="vue.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+    {{ name }}
+</div>
+
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            name: 'moqi'
+        }
+    });
+</script>
+</body>
 </html>
