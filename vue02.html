@@ -25,7 +25,13 @@
 <p></p>
 
 <div id="app3">
-    {{foo}}
+    <p>{{foo}}</p>
+    <!--
+        这里的 foo 不会更新
+        前端 console 报错:
+        [Vue warn]: Error in v-on handler: "TypeError: Cannot assign to read only property 'foo' of object '#<Object>'"
+     -->
+    <button v-on:click="foo = 'newBar'">Try Change it</button>
 </div>
 
 <script type="text/javascript">
