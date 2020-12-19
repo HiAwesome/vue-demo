@@ -13,7 +13,19 @@
 <div id="example">
     <p>Original message: "{{ message }}"</p>
     <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    <!--
+        计算属性缓存 vs 方法
+        计算属性缓存：计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。
+        方法：每当触发重新渲染时，调用方法将总会再次执行函数。
+     -->
+    <p>Reversed message: "{{ reversedMessageMethod() }}"</p>
 </div>
+<!--
+    计算属性 vs 侦听属性
+    侦听属性: 命令式且重复的
+-->
+<div id="demo_computed">Computed message: "{{ full_name }}"</div>
+<div id="demo_watch">Watch message: "{{ full_name }}"</div>
 
 <script type="text/javascript">
     var vm = new Vue({
@@ -24,6 +36,41 @@
         computed: {
             reversedMessage: function () {
                 return this.message.split('').reverse().join('')
+            }
+        },
+        methods: {
+            reversedMessageMethod: function () {
+                return this.message.split('').reverse().join()
+            }
+        }
+    })
+
+    var vm1 = new Vue({
+        el: '#demo_watch',
+        data: {
+            first_name: 'Foo',
+            last_name: 'Bar',
+            full_name: 'Foo Bar'
+        },
+        watch: {
+            first_name: function (val) {
+                this.full_name = val + ' ' + this.last_name
+            },
+            last_name: function (val) {
+                this.full_name = this.first_name + ' ' + val
+            }
+        }
+    })
+
+    var vm2 = new Vue({
+        el: '#demo_computed',
+        data: {
+            first_name: 'Foo',
+            last_name: 'Bar'
+        },
+        computed: {
+            full_name: function () {
+                return this.first_name + ' ' + this.last_name
             }
         }
     })
