@@ -27,6 +27,9 @@
 <div id="demo_computed">Computed message: "{{ full_name }}"</div>
 <div id="demo_watch">Watch message: "{{ full_name }}"</div>
 
+<!-- 计算属性的 setter -->
+<div id="demo_computed_setter">Computed Setter message: "{{ full_name }}"</div>
+
 <script type="text/javascript">
     var vm = new Vue({
         el: '#example',
@@ -71,6 +74,29 @@
         computed: {
             full_name: function () {
                 return this.first_name + ' ' + this.last_name
+            }
+        }
+    })
+
+    var vm3 = new Vue({
+        el: '#demo_computed_setter',
+        data: {
+            first_name: 'Foo',
+            last_name: 'Bar'
+        },
+        computed: {
+            full_name: {
+                // getter
+                get: function () {
+                    return this.first_name + ' ' + this.last_name
+                },
+
+                // setter
+                set: function (new_value) {
+                    var names = new_value.split(' ')
+                    this.first_name = names[0]
+                    this.last_name = names[names.length - 1]
+                }
             }
         }
     })
