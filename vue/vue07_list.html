@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<!-- 列表渲染 -->
+<!-- 用 v-for 把一个数组对应为一组元素 -->
+<div id="v1">
+    <ul id="example-1">
+        <li v-for="item in items" :key="item.message">
+            {{ item.message }}
+        </li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            items: [
+                {message: 'Foo'},
+                {message: 'Bar'}
+            ]
+        }
+    })
+</script>
+</body>
+</html>
