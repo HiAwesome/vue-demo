@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Class and Style</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<!--  Class 与 Style 绑定 -->
+<!-- 绑定 HTML Class -->
+<!-- 对象语法 -->
+<div id="v1" v-bind:class="{ active: isActive }">Hello World</div>
+
+<p></p>
+
+<div id="v2" class="static"
+     v-bind:class="{ active: isActive, 'text-danger': hasError}">div2
+</div>
+
+<p></p>
+
+<div id="v3" v-bind:class="classObject">div3</div>
+
+<p></p>
+
+<div id="v4" v-bind:class="classObject">div4</div>
+
+<p></p>
+
+<!-- 数组语法 -->
+<div id="v5" v-bind:class="[activeClass, errorClass]">div5</div>
+
+<p></p>
+
+<!-- isActive 是 truthy 类型即可，truthy 参考 https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy -->
+<div id="v6" v-bind:class="[isActive ? activeClass : '', errorClass]">div6</div>
+
+<p></p>
+
+<div id="v7" v-bind:class="[{ active: isActive }, errorClass]">div7</div>
+
+<!-- 用在组件上 -->
+
+<p></p>
+
+<div id="v8">
+    <my-component class="baz boo"></my-component>
+</div>
+
+<p></p>
+
+<div id="v9">
+    <my-component v-bind:class="{ active: isActive }"></my-component>
+</div>
+
+<script type="text/javascript">
+    var v1 = new Vue({
+        el: '#v1',
+        data: {
+            isActive: true
+        }
+    })
+
+    var v2 = new Vue({
+        el: '#v2',
+        data: {
+            isActive: true,
+            hasError: false
+        }
+    })
+
+    var v3 = new Vue({
+        el: '#v3',
+        data: {
+            classObject: {
+                active: true,
+                'text-danger': false
+            }
+        }
+    })
+
+    var v4 = new Vue({
+        el: '#v4',
+        data: {
+            isActive: true,
+            error: null
+        },
+        computed: {
+            classObject: function () {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    })
+
+    var v5 = new Vue({
+        el: '#v5',
+        data: {
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        }
+    })
+
+    var v6 = new Vue({
+        el: '#v6',
+        data: {
+            isActive: 'something',
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        }
+    })
+
+    var v7 = new Vue({
+        el: '#v7',
+        data: {
+            isActive: 'something',
+            errorClass: 'text-danger'
+        }
+    })
+
+    Vue.component('my-component', {
+        template: '<p class="foo bar">Hi</p>'
+    })
+
+    var v8 = new Vue({
+        el: '#v8'
+    })
+
+    var v9 = new Vue({
+        el: '#v9',
+        data: {
+            isActive: true
+        }
+    })
+</script>
+</body>
+</html>
