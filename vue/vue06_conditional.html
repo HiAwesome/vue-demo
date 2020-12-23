@@ -8,13 +8,156 @@
 
 <body>
 <!-- 条件渲染 -->
+<!-- v-if -->
 <div id="v1">
     <h1 v-if="awesome">Vue is awesome!</h1>
     <h1 v-else>Oh no 😅</h1>
 </div>
 
-<script type="text/javascript">
+<p></p>
 
+<!-- 在 template 元素上使用 v-if 条件渲染分组 -->
+<div id="v2">
+    <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+</div>
+
+<p></p>
+
+<!-- v-else -->
+<div id="v3">
+    <div v-if="Math.random() > 0.5">
+        Now you see me
+    </div>
+    <div v-else>
+        Now you don't
+    </div>
+</div>
+
+<p></p>
+
+<!-- v-else-if -->
+<div id="v4">
+    <div v-if="type === 'A'">
+        A
+    </div>
+    <div v-else-if="type === 'B'">
+        B
+    </div>
+    <div v-else-if="type === 'C'">
+        C
+    </div>
+    <div v-else>
+        Not A/B/C
+    </div>
+</div>
+
+<p></p>
+
+<!-- 用 key 管理可复用的元素 -->
+<div id="v5">
+    <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <label>
+            <input placeholder="Enter your username">
+        </label>
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <label>
+            <input placeholder="Enter your email address">
+        </label>
+    </template>
+</div>
+
+<p></p>
+
+<div id="v6">
+    <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <label>
+            <input placeholder="Enter your username" key="username-input">
+        </label>
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <label>
+            <input placeholder="Enter your email address" key="email-input">
+        </label>
+    </template>
+</div>
+
+<!-- v-show -->
+
+<div id="v7">
+    <h1 v-show="ok">Hello!</h1>
+</div>
+
+<!--
+    v-if vs v-show
+    v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
+    v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
+    相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+    一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。
+    因此，如果需要非常频繁地切换，则使用 v-show 较好；
+    如果在运行时条件很少改变，则使用 v-if 较好。
+-->
+
+<!--
+    v-if 与 v-for 一起使用
+    不推荐同时使用 v-if 和 v-for。
+    当它们一起使用时，v-for 具有比 v-if 更高的优先级
+-->
+
+<script type="text/javascript">
+    var v1 = new Vue({
+        el: '#v1',
+        data: {
+            awesome: true
+        }
+    })
+
+    var v2 = new Vue({
+        el: '#v2',
+        data: {
+            ok: true
+        }
+    })
+
+    var v3 = new Vue({
+        el: '#v3'
+    })
+
+    var v4 = new Vue({
+        el: '#v4',
+        data: {
+            type: 'M'
+        }
+    })
+
+    var v5 = new Vue({
+        el: '#v5',
+        data: {
+            loginType: 'username'
+        }
+    })
+
+    var v6 = new Vue({
+        el: '#v6',
+        data: {
+            loginType: 'email'
+        }
+    })
+
+    var v7 = new Vue({
+        el: '#v7',
+        data: {
+            ok: false
+        }
+    })
 </script>
 </body>
 </html>
