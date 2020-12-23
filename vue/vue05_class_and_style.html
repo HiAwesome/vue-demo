@@ -54,6 +54,40 @@
     <my-component v-bind:class="{ active: isActive }"></my-component>
 </div>
 
+<!-- 绑定内联样式 -->
+
+<p></p>
+
+<div id="v10"
+     v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">绑定内联样式
+</div>
+
+
+<p></p>
+
+<div id="v11"
+     v-bind:style="styleObject">绑定内联样式到对象
+</div>
+
+<!-- 数组语法 -->
+
+<p></p>
+
+<div id="v12"
+     v-bind:style="[baseStyles, overridingStyles]">将多个样式对象应用到同一个元素
+</div>
+
+<!-- 自动添加前缀 -->
+
+<!-- 多重值 -->
+
+<p></p>
+
+<!-- 这样写只会渲染数组中最后一个被浏览器支持的值 -->
+<div
+     :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex']}">多重值
+</div>
+
 <script type="text/javascript">
     var v1 = new Vue({
         el: '#v1',
@@ -133,6 +167,38 @@
         el: '#v9',
         data: {
             isActive: true
+        }
+    })
+
+    var v10 = new Vue({
+        el: '#v10',
+        data: {
+            activeColor: 'red',
+            fontSize: 30
+        }
+    })
+
+    var v11 = new Vue({
+        el: '#v11',
+        data: {
+            styleObject: {
+                color: 'green',
+                fontSize: '30px'
+            }
+        }
+    })
+
+    var v12 = new Vue({
+        el: '#v12',
+        data: {
+            baseStyles: {
+                color: 'green',
+                fontSize: '30px'
+            },
+            overridingStyles: {
+                color: 'blue',
+                fontSize: '60px'
+            },
         }
     })
 </script>
