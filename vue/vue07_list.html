@@ -77,6 +77,14 @@
     <li v-for="n in evenNumbers">{{ n }}</li>
 </div>
 
+<p></p>
+
+<div id="sort-example2">
+    <ul v-for="set in sets">
+        <li v-for="n in even(set)">{{ n }}</li>
+    </ul>
+</div>
+
 <script type="text/javascript">
     var example1 = new Vue({
         el: '#example-1',
@@ -118,6 +126,23 @@
         computed: {
             evenNumbers: function () {
                 return this.numbers.filter(function (number) {
+                    return number % 2 === 0
+                })
+            }
+        }
+    })
+
+    var sortExample2 = new Vue({
+        el: '#sort-example2',
+        data: {
+            sets: [
+                [1, 2, 3, 4, 5],
+                [6, 7, 8, 9, 10]
+            ]
+        },
+        methods: {
+            even: function (numbers) {
+                return numbers.filter(function (number) {
                     return number % 2 === 0
                 })
             }
