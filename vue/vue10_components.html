@@ -22,8 +22,36 @@
     <button-counter></button-counter>
 </div>
 
+<!--
+    组件的组织
+    全局注册 vs 局部注册
+-->
+
+<!-- 通过 prop 向子组件传递数据 -->
+<div id="blog-example1">
+    <blog-post title="My journey with Vue"></blog-post>
+    <blog-post title="Blogging with Vue"></blog-post>
+    <blog-post title="Why Vue is so fun"></blog-post>
+</div>
+
+<br>
+
+<div id="blog-post-demo">
+    <blog-post
+            v-for="post in posts"
+            v-bind:key="post.id"
+            v-bind:title="post.title"
+    ></blog-post>
+</div>
+
 <script type="text/javascript">
+    Vue.component('blog-post', {
+        props: ['title'],
+        template: '<h3>{{ title }}</h3>'
+    })
+
     Vue.component('button-counter', {
+        // data 必须是一个函数，用来维护一份被返回对象独立的拷贝
         data: function () {
             return {
                 count1: 0
@@ -31,6 +59,19 @@
         },
         template: '<button v-on:click="count1++">You clicked me {{ count1 }} times.</button>'
     })
+
+    var v4 = new Vue({
+        el: '#blog-post-demo',
+        data: {
+            posts: [
+                {id: 1, title: 'My journey with Vue'},
+                {id: 2, title: 'Blogging with Vue'},
+                {id: 3, title: 'Why Vue is so fun'}
+            ]
+        }
+    })
+
+    var v3 = new Vue({el: '#blog-example1'})
 
     var v2 = new Vue({el: '#multi-components-demo'})
 
