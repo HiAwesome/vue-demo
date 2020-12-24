@@ -85,6 +85,75 @@
     </ul>
 </div>
 
+<!-- 在 v-for 里使用值范围 -->
+<div id="range-example">
+    <span v-for="n in 10">{{ n }}</span>
+</div>
+
+<!-- 在 template 上使用 v-for -->
+<div id="template-v-for">
+    <ul>
+        <template v-for="item in items">
+            <li>{{ item.message }}</li>
+            <li class="divider" role="presentation"></li>
+        </template>
+    </ul>
+</div>
+
+<!-- v-for 与 v-if 一起使用 -->
+<div id="v-for-and-v-if">
+    <!-- 将只渲染未完成的 todo -->
+    <li v-for="todo in todos" v-if="!todo.isComplete">
+        {{ todo }}
+    </li>
+
+    <p></p>
+
+    <ul v-if="todos.length">
+        <li v-for="todo in todos">
+            {{ todo }}
+        </li>
+    </ul>
+    <p v-else>No todos left!</p>
+</div>
+
+<!-- 在组件上使用 v-for -->
+<div id="component-v-for">
+    <component-v-for v-for="item in items" :key="item.id"></component-v-for>
+</div>
+
+<div id="component-v-for2">
+    <component-v-for
+            v-for="(item, index) in items"
+            v-bind:itemid="item"
+            v-bind:index="index"
+            v-bind:key="item.id"
+    ></component-v-for>
+</div>
+
+<!-- 一个简单的 todo 列表的完整例子 -->
+<div id="todo-list-example">
+    <form v-on:submit.prevent="addNewTodo">
+        <label for="new-todo">Add a todo</label>
+        <input
+                v-model="newTodoText"
+                id="new-todo"
+                placeholder="E.g. Feed the cat"
+        >
+        <button>Add</button>
+    </form>
+    <ul>
+        <li
+                is="todo-item"
+                v-for="(todo, index) in todos"
+                v-bind:key="todo.id"
+                v-bind:title="todo.title"
+                v-on:remove="todos.splice(index, 1)"
+        ></li>
+    </ul>
+</div>
+
+
 <script type="text/javascript">
     var example1 = new Vue({
         el: '#example-1',
@@ -145,6 +214,70 @@
                 return numbers.filter(function (number) {
                     return number % 2 === 0
                 })
+            }
+        }
+    })
+
+    var rangeExample = new Vue({
+        el: '#range-example',
+    })
+
+    var templateVFor = new Vue({
+        el: '#template-v-for',
+        data: {
+            items: [
+                {message: 'Foo'},
+                {message: 'Bar'}
+            ]
+        }
+    })
+
+    Vue.component('component-v-for', {
+        template: {
+            items: [
+                {message: 'Foo'},
+                {message: 'Bar'}
+            ]
+        }
+    })
+
+    Vue.component('todo-item', {
+        template: '\
+            <li>\
+              {{ title }}\
+              <button v-on:click="$emit(\'remove\')">Remove</button>\
+            </li>\
+        ',
+        props: ['title']
+    })
+
+    var v1 = new Vue({
+        el: '#todo-list-example',
+        data: {
+            newTodoText: '',
+            todos: [
+                {
+                    id: 1,
+                    title: 'Do the dishes'
+                },
+                {
+                    id: 2,
+                    title: 'Take out the trash'
+                },
+                {
+                    id: 3,
+                    title: 'Mow the lawn'
+                }
+            ],
+            nextTodoId: 4
+        },
+        methods: {
+            addNewTodo: function () {
+                this.todos.push({
+                    id: this.nextTodoId++,
+                    title: this.newTodoText
+                })
+                this.newTodoText = ''
             }
         }
     })
