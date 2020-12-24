@@ -20,7 +20,37 @@
     <button v-on:click="greet">Greet!</button>
 </div>
 
+<p></p>
+
+<!-- 内联处理器中的方法 -->
+<div id="example-3">
+    <button v-on:click="say('Hi')">Say Hi</button>
+    <button v-on:click="say('What')">Say What</button>
+
+    <p></p>
+
+    <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+        Submit
+    </button>
+</div>
+
 <script type="text/javascript">
+    var example3 = new Vue({
+        el: '#example-3',
+        methods: {
+            say: function (message) {
+                alert(message)
+            },
+            warn: function (message, event) {
+                // 现在我们可以访问原生事件对象
+                if (event) {
+                    event.preventDefault()
+                }
+                alert(message)
+            }
+        }
+    })
+
     var example2 = new Vue({
         el: '#example-2',
         data: {
