@@ -72,7 +72,43 @@
     </div>
 </div>
 
+<br>
+
+<!-- 在组件上使用 v-model -->
+<div id="component-v-model">
+    <label>
+        <input v-model="searchText">
+    </label>
+
+    <br>
+    <br>
+
+    <label>
+        <input
+                v-bind:value="searchText"
+                v-on:input="searchText = $event.target.value">
+    </label>
+
+    <br>
+    <br>
+
+    <custom-input
+            v-bind:value="searchText"
+            v-on:input="searchText = $event"
+    ></custom-input>
+</div>
+
 <script type="text/javascript">
+    Vue.component('custom-input', {
+        props: ['value'],
+        template: `
+          <input
+              v-bind:value="value"
+              v-on:input="$emit('input', $event.target.value)"
+          >
+        `
+    })
+
     Vue.component('blog-post2', {
         props: ['post'],
         template: `
@@ -115,6 +151,13 @@
             }
         },
         template: '<button v-on:click="count1++">You clicked me {{ count1 }} times.</button>'
+    })
+
+    var v7 = new Vue({
+        el: '#component-v-model',
+        data: {
+            searchText: ''
+        }
     })
 
     var v6 = new Vue({
