@@ -13,6 +13,15 @@
     <button-counter></button-counter>
 </div>
 
+<br>
+
+<!-- 组件的复用 -->
+<div id="multi-components-demo">
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+</div>
+
 <script type="text/javascript">
     Vue.component('button-counter', {
         data: function () {
@@ -23,9 +32,10 @@
         template: '<button v-on:click="count1++">You clicked me {{ count1 }} times.</button>'
     })
 
+    var v2 = new Vue({el: '#multi-components-demo'})
+
     // 定义 component 必须放在引用之前
     var v1 = new Vue({el: '#components-demo'})
-
 </script>
 </body>
 </html>
