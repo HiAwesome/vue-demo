@@ -88,7 +88,31 @@
 
 <br>
 
+<!-- 用 v-for 渲染的动态选项 -->
+<div id="v-for-select">
+    <label>
+        <select v-model="selected">
+            <option v-for="option in options" v-bind:value="option.value">
+                {{ option.text }}
+            </option>
+        </select>
+    </label>
+    <span>Selected: {{ selected }}</span>
+</div>
+
 <script type="text/javascript">
+    var vForSelect = new Vue({
+        el: '#v-for-select',
+        data: {
+            selected: 'A',
+            options: [
+                {text: 'One', value: 'A'},
+                {text: 'Two', value: 'B'},
+                {text: 'Three', value: 'C'}
+            ]
+        }
+    })
+
     var multiSelect = new Vue({
         el: '#multi-select',
         data: {
