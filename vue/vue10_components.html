@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Components</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<!-- 组件基础 -->
+<!-- 基本示例 -->
+<div id="components-demo">
+    <button-counter></button-counter>
+</div>
+
+<script type="text/javascript">
+    Vue.component('button-counter', {
+        data: function () {
+            return {
+                count1: 0
+            }
+        },
+        template: '<button v-on:click="count1++">You clicked me {{ count1 }} times.</button>'
+    })
+
+    // 定义 component 必须放在引用之前
+    var v1 = new Vue({el: '#components-demo'})
+
+</script>
+</body>
+</html>
