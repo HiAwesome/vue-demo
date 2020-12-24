@@ -17,6 +17,41 @@
     </ul>
 </div>
 
+<!-- 加上当前项的索引 -->
+<div id="v2">
+    <ul id="example-2">
+        <!-- 这里分隔符使用 in 和 of 都可以，of 更接近 JavaScript 迭代器的语法 -->
+        <li v-for="(item, index) in items">
+            {{parentMessage}} - {{index}} - {{item.message}}
+        </li>
+    </ul>
+</div>
+
+<!-- 在 v-for 里使用对象 -->
+<div id="v3">
+    <ul id="v-for-object" class="demo">
+        <!-- just value -->
+        <li v-for="value in object">
+            {{ value }}
+        </li>
+
+        <p></p>
+
+        <!-- key and value -->
+        <li v-for="(value, name) in object">
+            {{ name }}: {{ value}}
+        </li>
+
+        <p></p>
+
+        <!-- key and value and index -->
+        <li v-for="(value, name, index) in object">
+            {{index}}. {{ name }}: {{ value}}
+        </li>
+    </ul>
+
+</div>
+
 <script type="text/javascript">
     var example1 = new Vue({
         el: '#example-1',
@@ -25,6 +60,28 @@
                 {message: 'Foo'},
                 {message: 'Bar'}
             ]
+        }
+    })
+
+    var example2 = new Vue({
+        el: '#example-2',
+        data: {
+            parentMessage: 'Parent',
+            items: [
+                {message: 'Foo'},
+                {message: 'Bar'}
+            ]
+        }
+    })
+
+    var vForObject = new Vue({
+        el: '#v-for-object',
+        data: {
+            object: {
+                title: "How to do lists in Vue",
+                author: 'Jane Doe',
+                publishedAt: '2016-04-10'
+            }
         }
     })
 </script>
