@@ -100,6 +100,85 @@
     <span>Selected: {{ selected }}</span>
 </div>
 
+<!-- 值绑定 -->
+<div id="value-binding">
+    <!-- 当选中时，picked 为字符串 a -->
+    <label>
+        <input type="radio" v-model="picked" value="a">
+    </label>
+
+    <br>
+
+    <!-- toggle 为 true 或 false -->
+    <label>
+        <input type="checkbox" v-model="toggle">
+    </label>
+
+    <br>
+
+    <!-- 当选中第一个选项时，selected 为字符串 abc -->
+    <label>
+        <select v-model="selected">
+            <option value="abc">ABC</option>
+        </select>
+    </label>
+
+    <br>
+
+    <!-- 复选框 -->
+    <label>
+        <input
+            type="checkbox"
+            v-model="toggle"
+            true-value="yes"
+            false-value="no"
+        >
+    </label>
+
+    <br>
+
+    <!-- 单选按钮 -->
+    <label>
+        <input type="radio" v-model="pick" v-bind:value="a">
+    </label>
+
+    <br>
+
+    <!-- 选择框的选项 -->
+    <label>
+        <select v-model="selected">
+            <!-- 内联对象字面量 -->
+            <option v-bind:value="{ number: 123}">123</option>
+        </select>
+    </label>
+
+    <br>
+
+    <!--
+        修饰符
+        lazy number trim
+    -->
+    <!-- 在 change 而非 input 时更新 -->
+    <label>
+        <input v-model.lazy="msg">
+    </label>
+
+    <br>
+
+    <!-- 如果想将用户的输入值转为数值类型，可以给 v-mode 添加 number 修饰符 -->
+    <label>
+        <input v-model.number="age" type="number">
+    </label>
+
+    <!-- trim 自动过滤用户输入的首位空白字符 -->
+    <label>
+        <input v-model.trim="msg">
+    </label>
+
+</div>
+
+<!-- 在组件上使用 v-model -->
+
 <script type="text/javascript">
     var vForSelect = new Vue({
         el: '#v-for-select',
