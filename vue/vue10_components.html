@@ -55,9 +55,43 @@
     ></blog-post1>
 </div>
 
+<br>
+
 <!-- 监听子组件事件 -->
+<!-- 使用事件抛出一个值 -->
+<div id="blog-posts-events-demo">
+    <div :style="{ fontSize: postFontSize + 'em' }">
+        <blog-post2
+                v-for="post in posts"
+                v-bind:key="post.id"
+                v-bind:post="post"
+                v-on:enlarge-text="postFontSize += $event"
+                v-on:reduce-text="postFontSize -= 0.1"
+                v-on:enlarge-text-method="onEnlargeText"
+        ></blog-post2>
+    </div>
+</div>
 
 <script type="text/javascript">
+    Vue.component('blog-post2', {
+        props: ['post'],
+        template: `
+          <div class="blog-post2">
+          <h3>{{ post.title }}</h3>
+          <button v-on:click="$emit('enlarge-text', 0.1)">
+            Enlarge text
+          </button>
+          <button v-on:click="$emit('reduce-text')">
+            Reduce text
+          </button>
+          <button v-on:click="$emit('enlarge-text-method', 0.2)">
+            Enlarge Text Method
+          </button>
+          <div v-html="post.content"></div>
+          </div>
+        `
+    })
+
     Vue.component('blog-post1', {
         props: ['post'],
         template: `
@@ -81,6 +115,23 @@
             }
         },
         template: '<button v-on:click="count1++">You clicked me {{ count1 }} times.</button>'
+    })
+
+    var v6 = new Vue({
+        el: '#blog-posts-events-demo',
+        data: {
+            posts: [
+                {id: 1, title: 'My journey with Vue2'},
+                {id: 2, title: 'Blogging with Vue2'},
+                {id: 3, title: 'Why Vue is so fun2'}
+            ],
+            postFontSize: 2
+        },
+        methods: {
+            onEnlargeText: function (enlargeAmount) {
+                this.postFontSize += enlargeAmount
+            }
+        }
     })
 
     var v5 = new Vue({
