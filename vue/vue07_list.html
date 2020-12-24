@@ -9,8 +9,8 @@
 <body>
 <!-- 列表渲染 -->
 <!-- 用 v-for 把一个数组对应为一组元素 -->
-<div id="v1">
-    <ul id="example-1">
+<div id="example-1">
+    <ul>
         <li v-for="item in items" :key="item.message">
             {{ item.message }}
         </li>
@@ -18,8 +18,8 @@
 </div>
 
 <!-- 加上当前项的索引 -->
-<div id="v2">
-    <ul id="example-2">
+<div id="example-2">
+    <ul>
         <!-- 这里分隔符使用 in 和 of 都可以，of 更接近 JavaScript 迭代器的语法 -->
         <li v-for="(item, index) in items">
             {{parentMessage}} - {{index}} - {{item.message}}
@@ -28,8 +28,8 @@
 </div>
 
 <!-- 在 v-for 里使用对象 -->
-<div id="v3">
-    <ul id="v-for-object" class="demo">
+<div id="v-for-object">
+    <ul class="demo">
         <!-- just value -->
         <li v-for="value in object">
             {{ value }}
@@ -53,10 +53,8 @@
 </div>
 
 <!-- 维护状态 -->
-<div id="v4">
-    <div id="maintenance-status" v-for="item in items" v-bind:key="item.id">
-        <!-- 内容 -->
-    </div>
+<div id="maintenance-status" v-for="item in items" v-bind:key="item.id">
+    <!-- 内容 -->
 </div>
 
 <!--
