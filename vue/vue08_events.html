@@ -76,7 +76,37 @@
 
 </div>
 
+<!-- 按键修饰符 -->
+<div id="key-example">
+    <!-- 只有在 key 是 Enter 时调用 vm.submit() -->
+    <label>
+        <input v-on:keyup.enter="submit">
+    </label>
+
+    <!--
+        你可以直接将 KeyboardEvent.key 暴露的任意有效按键名转换为 kebab-case 来作为修饰符
+        在下述示例中，处理函数只会在 $event.key 等于 PageDown 时被调用
+    -->
+    <label>
+        <input v-on:keyup.page-down="onPageDown">
+    </label>
+
+    <!--
+        按键码：
+        为了在必要的情况下支持旧浏览器，Vue 提供了绝大多数常用的按键码的别名
+        enter tab delete esc space up down left right
+        也可以通过全局 config.keyCodes 对象自定义按键修饰别名
+    -->
+    <label>
+        <input v-on:keyup.13="submit">
+    </label>
+</div>
+
+
 <script type="text/javascript">
+    // 可以使用 v-on:keyup.f1
+    Vue.config.keyCodes.f1 = 112
+
     var example3 = new Vue({
         el: '#example-3',
         methods: {
