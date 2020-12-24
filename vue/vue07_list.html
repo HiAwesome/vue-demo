@@ -52,6 +52,33 @@
 
 </div>
 
+<!-- 维护状态 -->
+<div id="v4">
+    <div id="maintenance-status" v-for="item in items" v-bind:key="item.id">
+        <!-- 内容 -->
+    </div>
+</div>
+
+<!--
+    数组更新检测
+    变更方法：
+        push, pop, shift, unshift, splice, sort, reverse, 可以打开控制台测试
+    例如：
+        example1.items.push({message:'some'})
+        example1.items.pop()
+    替换数组（控制台测试）：
+        example1.items = example1.items.filter(function (item) {
+            return item.message.match(/Foo/)
+        })
+    注意事项：
+        由于 JavaScript 的限制，Vue 不能检测数组和对象的变化。
+-->
+
+<!-- 显示过滤/排序后的结果 -->
+<div id="v5">
+    <li id="sort-example" v-for="n in evenNumbers">{{ n }}</li>
+</div>
+
 <script type="text/javascript">
     var example1 = new Vue({
         el: '#example-1',
@@ -81,6 +108,20 @@
                 title: "How to do lists in Vue",
                 author: 'Jane Doe',
                 publishedAt: '2016-04-10'
+            }
+        }
+    })
+
+    var sortExample = new Vue({
+        el: '#sort-example',
+        data: {
+            numbers: [1, 2, 3, 4, 5]
+        },
+        computed: {
+            evenNumbers: function () {
+                return this.numbers.filter(function (number) {
+                    return number % 2 === 0
+                })
             }
         }
     })
