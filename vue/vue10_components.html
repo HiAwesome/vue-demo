@@ -44,7 +44,28 @@
     ></blog-post>
 </div>
 
+<br>
+
+<!-- 单个根元素 -->
+<div id="blog-post1-demo">
+    <blog-post1
+            v-for="post in posts"
+            v-bind:key="post.id"
+            v-bind:post="post"
+    ></blog-post1>
+</div>
+
 <script type="text/javascript">
+    Vue.component('blog-post1', {
+        props: ['post'],
+        template: `
+          <div class="blog-post1">
+          <h3>{{ post.title }}</h3>
+          <div v-html="post.content"></div>
+          </div>
+        `
+    })
+
     Vue.component('blog-post', {
         props: ['title'],
         template: '<h3>{{ title }}</h3>'
@@ -60,13 +81,24 @@
         template: '<button v-on:click="count1++">You clicked me {{ count1 }} times.</button>'
     })
 
+    var v5 = new Vue({
+        el: '#blog-post1-demo',
+        data: {
+            posts: [
+                {id: 1, title: 'My journey with Vue1'},
+                {id: 2, title: 'Blogging with Vue1'},
+                {id: 3, title: 'Why Vue is so fun1'}
+            ]
+        }
+    })
+
     var v4 = new Vue({
         el: '#blog-post-demo',
         data: {
             posts: [
-                {id: 1, title: 'My journey with Vue'},
-                {id: 2, title: 'Blogging with Vue'},
-                {id: 3, title: 'Why Vue is so fun'}
+                {id: 1, title: 'My journey with Vue0'},
+                {id: 2, title: 'Blogging with Vue0'},
+                {id: 3, title: 'Why Vue is so fun0'}
             ]
         }
     })
