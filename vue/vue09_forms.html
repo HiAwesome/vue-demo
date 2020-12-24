@@ -8,9 +8,135 @@
 
 <body>
 <!-- 表单输入绑定 -->
+<!-- 基础用法 -->
+<!-- 文本 -->
+<div id="text1">
+    <label>
+        <input v-model="message" placeholder="edit me">
+    </label>
+    <p>Message is: {{ message }}</p>
+</div>
+
+<br>
+
+<!-- 多行文本 -->
+<div id="multi-text">
+    <span>Multiline message is: </span>
+    <p style="white-space: pre-line;">{{ message }}</p>
+    <br>
+    <label>
+        <textarea v-model="message" placeholder="add multiple lines"></textarea>
+    </label>
+</div>
+
+<!-- 复选框 -->
+<div id="checkbox1">
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+</div>
+
+<br>
+
+<div id="checkbox2">
+    <input type="checkbox" id="jack" value="jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="john" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames }}</span>
+</div>
+
+<!-- 单选按钮 -->
+<div id="single-button">
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+</div>
+
+<!-- 选择框 -->
+<div id="select-box">
+    <label>
+        <select v-model="selected">
+            <option disabled value="">请选择</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+    </label>
+    <span>Selected: {{ selected }}</span>
+</div>
+
+<br>
+
+<!-- 多选时：绑定到一个数组 -->
+<div id="multi-select">
+    <label>
+        <select v-model="selected" multiple style="width: 50px;">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <br>
+        <span>Selected: {{ selected }}</span>
+    </label>
+</div>
+
+<br>
 
 <script type="text/javascript">
+    var multiSelect = new Vue({
+        el: '#multi-select',
+        data: {
+            selected: []
+        }
+    })
 
+    var selectBox = new Vue({
+        el: '#select-box',
+        data: {
+            selected: ''
+        }
+    })
+
+    var singleButton = new Vue({
+        el: '#single-button',
+        data: {
+            picked: ''
+        }
+    })
+
+    var checkbox2 = new Vue({
+        el: '#checkbox2',
+        data: {
+            checkedNames: []
+        }
+    })
+
+    var checkbox1 = new Vue({
+        el: '#checkbox1',
+        data: {
+            checked: false
+        }
+    })
+
+    var multiText = new Vue({
+        el: '#multi-text',
+        data: {
+            message: ''
+        }
+    })
+
+    var text1 = new Vue({
+        el: '#text1',
+        data: {
+            message: ''
+        }
+    })
 </script>
 </body>
 </html>
