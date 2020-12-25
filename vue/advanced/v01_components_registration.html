@@ -8,9 +8,26 @@
 
 <body>
 <!-- 组件注册 -->
+<!--
+    组件名：
+    使用 kebab-case 风格（my-component-name）时，调用必须也是 kebab-case 风格
+    使用 PascalCase 风格（MyComponentName）时，两种风格都可以调用。
+    注意，尽管如此，在 DOM 中使用时只有 kebab-case 是有效的。
+-->
+
+<!-- 全局注册 -->
+<div id="app1">
+    <component-a></component-a>
+    <component-b></component-b>
+    <component-c></component-c>
+</div>
 
 <script type="text/javascript">
+    Vue.component('component-a', {template: '<a></a>'})
+    Vue.component('component-b', {template: '<a></a>'})
+    Vue.component('component-c', {template: '<a></a>'})
 
+    new Vue({el: '#app1'})
 </script>
 </body>
 </html>
