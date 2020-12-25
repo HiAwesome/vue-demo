@@ -22,6 +22,19 @@
         props: ['postTitle'],
         template: '<h3>{{ postTitle }}</h3>'
     })
+
+    // prop 类型
+    Vue.component('prop-types-demo', {
+        props: {
+            title: String,
+            likes: Number,
+            isPublished: Boolean,
+            commentIds: Array,
+            author: Object,
+            callback: Function,
+            contactsPromise: Promise // or any other constructor
+        }
+    })
 </script>
 </body>
 </html>
