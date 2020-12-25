@@ -22,7 +22,35 @@
     <component-c></component-c>
 </div>
 
+<!-- 局部注册 -->
+<div id="app2">
+    <!--<component-a1></component-a1>
+    <component-b1></component-b1>
+    <component-c1></component-c1>-->
+</div>
+
+<!--
+    模块系统：
+    详细介绍了通过 Babel 和 webpack 使用 ES2015 模块
+    export default 的语法
+
+    记住全局注册的行为必须在根 Vue 实例（通过 new Vue）创建之前发生
+-->
+
 <script type="text/javascript">
+    var ComponentA1 = {/**/}
+    var ComponentB1 = {/**/}
+    var ComponentC1 = {/**/}
+
+    new Vue({
+        el: '#app2',
+        components: {
+            'components-a1': ComponentA1,
+            'components-b1': ComponentB1,
+            'components-v1': ComponentC1
+        }
+    })
+
     Vue.component('component-a', {template: '<a></a>'})
     Vue.component('component-b', {template: '<a></a>'})
     Vue.component('component-c', {template: '<a></a>'})
