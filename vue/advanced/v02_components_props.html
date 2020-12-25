@@ -91,8 +91,44 @@
     ></prop-all-from-one-object>
 </div>
 
+<!--
+    非 Prop 的 Attribute
+        替换/合并已有的 Attribute
+        禁用 Attribute 继承
+-->
+<div id="base-input-demo">
+    <base-input
+        v-model="username"
+        required
+        placeholder="Enter your username"
+    ></base-input>
+</div>
 
 <script type="text/javascript">
+    // 禁用 Attribute 继承
+    Vue.component('base-input', {
+        inheritAttrs: false,
+        props: ['label', 'value'],
+        template: `
+          <label>
+          {{ label }}
+          <input
+            v-bind="$attrs"
+            v-bind:value="value"
+            v-on:input="$emit('input', $event.target.value)"
+          >
+          </label>
+        `
+    })
+
+    new Vue({
+        el: '#base-input-demo',
+        data: {
+            required: true
+        }
+    })
+
+
     // Prop 验证
     Vue.component('my-component', {
         props: {
@@ -115,7 +151,7 @@
                 type: Object,
                 // 对象或数组默认值必须从一个工厂函数获取
                 default: function () {
-                    return { message: 'hello' }
+                    return {message: 'hello'}
                 }
             },
             // 自定义验证函数
