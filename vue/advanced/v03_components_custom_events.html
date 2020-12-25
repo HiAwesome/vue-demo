@@ -19,6 +19,12 @@
     <base-input1 v-on:focus="onFocus"></base-input1>
 </div>
 
+<!--
+    .sync 修饰符（2.3.0 新增）
+    双向绑定会带来维护上的困难，推荐以 update:myPropName 的模式触发事件取而代之
+    我们为这个模式提供一个缩写 .sync
+-->
+
 <script type="text/javascript">
     Vue.component('base-input1', {
         inheritAttrs: false,
