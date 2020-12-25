@@ -93,6 +93,27 @@
 
 
 <script type="text/javascript">
+    // 单向数据流
+    Vue.component('unidirectional-data-flow-demo1', {
+        // 这个 prop 用来传递一个初始值，这个子组件接下来希望将其作为一个本地的 prop 数据来使用
+        props: ['initialCounter'],
+        data: function () {
+            return {
+                counter: this.initialCounter
+            }
+        }
+    })
+
+    Vue.component('unidirectional-data-flow-demo2', {
+        // 这个 prop 以一种原始的值传入且需要进行转换
+        props: ['size'],
+        computed: {
+            normalizedSize: function () {
+                return this.size.trim().toLowerCase()
+            }
+        }
+    })
+
     Vue.component('blog-post-02', {
         // 在 JavaScript 中是 camelCase 的
         props: ['postTitle'],
