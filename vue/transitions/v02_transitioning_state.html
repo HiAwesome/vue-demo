@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>TransitioningState</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/color-js@1.0.3"></script>
+</head>
+
+<body>
+<!--
+    状态过渡
+    对于数据元素本身的动效，我们可以结合 Vue 的响应式和组件系统，使用第三方库来实现切换元素的过渡状态。
+        状态动画和侦听器
+            animated-number-demo
+            example-7
+-->
+
+<div id="animated-number-demo">
+    <label>
+        <input v-model.number="number" type="number" step="20">
+    </label>
+    <p>{{ animatedNumber }}</p>
+</div>
+
+<br>
+
+<div id="example-7">
+    <input
+            v-model="colorQuery"
+            v-on:keyup.enter="updateColor"
+            placeholder="Enter a color"
+    >
+    <button v-on:click="updateColor">Update</button>
+    <p>Preview:</p>
+    <span
+            v-bind:style="{ backgroundColor: tweenedCSSColor }"
+            class="example-7-color-preview"
+    ></span>
+    <p>{{ tweenedCSSColor }}</p>
+</div>
+
+<script type="text/javascript">
+    new Vue({
+        el: '#animated-number-demo',
+        data: {
+            number: 0,
+            tweenedNumber: 0
+        },
+        computed: {
+            animatedNumber: function () {
+                return this.tweenedNumber.toFixed(0);
+            }
+        },
+        watch: {
+            number: function (newValue) {
+                gsap.to(this.$data, {duration: 0.5, tweenedNumber: newValue});
+            }
+        }
+    })
+
+    var Color = net.brehaut.Color
+
+    new Vue({
+        el: '#example-7',
+        data: {
+            colorQuery: '',
+            color: {
+                red: 0,
+                green: 0,
+                blue: 0,
+                alpha: 1
+            },
+            tweenedColor: {}
+        },
+        created: function () {
+            this.tweenedColor = Object.assign({}, this.color)
+        },
+        watch: {
+            color: function () {
+                function animate() {
+                    if (TWEEN.update()) {
+                        requestAnimationFrame(animate)
+                    }
+                }
+
+                new TWEEN.Tween(this.tweenedColor)
+                    .to(this.color, 750)
+                    .start()
+
+                animate()
+            }
+        },
+        computed: {
+            tweenedCSSColor: function () {
+                return new Color({
+                    red: this.tweenedColor.red,
+                    green: this.tweenedColor.green,
+                    blue: this.tweenedColor.blue,
+                    alpha: this.tweenedColor.alpha
+                }).toCSS()
+            }
+        },
+        methods: {
+            updateColor: function () {
+                this.color = new Color(this.colorQuery).toRGB()
+                this.colorQuery = ''
+            }
+        }
+    })
+</script>
+<style type="text/css">
+    .example-7-color-preview {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+    }
+</style>
+</body>
+</html>
