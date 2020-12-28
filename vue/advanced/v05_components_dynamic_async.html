@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>ComponentsDynamicAsync</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<!--
+    动态组件 & 异步组件
+    在动态组件上使用 keep-alive
+-->
+<div id="keep-alive-demo">
+    <!-- before -->
+    <component v-bind:is="currentTabComponent"></component>
+
+    <!-- after -->
+    <keep-alive>
+        <component v-bind:is="currentTabComponent"></component>
+    </keep-alive>
+</div>
+
+<br>
+
+<!-- 异步组件 -->
+<div id="async-example1">
+    <async-example></async-example>
+</div>
+
+<script type="text/javascript">
+    // 异步组件
+    Vue.component('async-example', function (resolve, reject) {
+        setTimeout(function () {
+            resolve({
+                template: '<div>I am async!</div>'
+            })
+        }, 1000)
+    })
+
+    new Vue({el: '#async-example1'})
+</script>
+</body>
+</html>
