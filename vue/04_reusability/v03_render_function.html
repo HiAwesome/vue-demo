@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>RenderFunction</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<!--
+    渲染函数 & JSX
+        基础
+            需要 JavaScript 的完全编程能力，可以用渲染函数
+-->
+
+<h1>
+    <a name="hello world" href="#hello-world">
+        Hello world!
+    </a>
+</h1>
+
+<script type="text/javascript">
+    Vue.component('anchored-heading', {
+        render: function (createElement) {
+            return createElement(
+                'h' + this.level,   // 标签名称
+                this.$slots.default // 子节点数组
+            )
+        },
+        props: {
+            level: {
+                type: Number,
+                required: true
+            }
+        }
+    })
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>
