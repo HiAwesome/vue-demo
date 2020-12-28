@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Mixins</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<!--
+    混入
+        基础
+            混入提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。
+            一个混入对象可以包含任意组件选项。
+-->
+
+<script type="text/javascript">
+    // 定义一个混入对象
+    var myMixin = {
+        created: function () {
+            this.hello()
+        },
+        methods: {
+            hello: function () {
+                alert('hello from mixin!')
+            }
+        }
+    }
+
+    // 定义一个使用混入对象的组件
+    var Component = Vue.extend({
+        mixins: [myMixin]
+    })
+
+    var component = new Component() // => 'hello from mixin!'
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>
