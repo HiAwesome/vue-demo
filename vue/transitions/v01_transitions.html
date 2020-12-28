@@ -14,7 +14,13 @@
     单元素/组件的过渡
         Vue 提供了 transition 的封装组件，在下列情形中，可以给任何元素和组件添加进入/离开过渡
         条件渲染(使用v-if), 条件展示(使用v-show), 动态组件, 组件根节点.
-
+        过渡的类名
+            v-enter, v-enter-active, v-enter-to, v-leave, v-leave-active, v-leave-to
+        CSS 过渡
+            css-demo1
+        CSS 动画
+            CSS 动画用法同 CSS 过渡，区别是动画中 v-enter 类名在节点插入 DOM 后不会立即删除，而是在 animationend 事件触发时删除。
+            css-demo2
 -->
 <div id="demo1">
     <button v-on:click="show = !show">
@@ -25,6 +31,26 @@
     </transition>
 </div>
 
+<br>
+
+<div id="css-demo1">
+    <button @click="show = !show">
+        Toggle render
+    </button>
+    <transition name="slide-fade">
+        <p v-if="show">hello</p>
+    </transition>
+</div>
+
+<br>
+
+<div id="css-demo2">
+    <button @click="show = !show">Toggle show</button>
+    <transition name="bounce">
+        <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia
+            diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+    </transition>
+</div>
 
 <script type="text/javascript">
     new Vue({
@@ -33,14 +59,66 @@
             show: true
         }
     })
-</script>
 
+    new Vue({
+        el: '#css-demo1',
+        data: {
+            show: true
+        }
+    })
+
+    new Vue({
+        el: '#css-demo2',
+        data: {
+            show: true
+        }
+    })
+</script>
 <script type="text/css">
+    /* fixme 目前 CSS 没有演示出来效果 */
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
     }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+    {
         opacity: 0;
+    }
+
+    /* 可以设置不同的进入和离开动画，设置持续时间和动画函数 */
+    .slide-fade-enter-active {
+        transition: all .3s ease;
+    }
+
+    .slide-fade-leave-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+
+    .slide-fade-enter, .slide-fade-leave-to
+        /* .slide-fade-leave-active for below version 2.1.8 */
+    {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+
+    .bounce-enter-active {
+        animation: bounce-in .5s;
+    }
+
+    .bounce-leave-active {
+        animation: bounce-in .5s reverse;
+    }
+
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
     }
 </script>
 </body>
