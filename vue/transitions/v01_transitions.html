@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Transitions</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -20,8 +21,13 @@
         CSS 过渡
             css-demo1
         CSS 动画
-            CSS 动画用法同 CSS 过渡，区别是动画中 v-enter 类名在节点插入 DOM 后不会立即删除，而是在 animationend 事件触发时删除。
             css-demo2
+            CSS 动画用法同 CSS 过渡，区别是动画中 v-enter 类名在节点插入 DOM 后不会立即删除，而是在 animationend 事件触发时删除。
+        自定义过渡的类型
+            css-demo3: 演示效果一致
+            我们可以通过以下 attribute 来自定义过渡类名，它们的优先级高于普通的类名。
+            这对于 Vue 的过渡系统和其他第三方 CSS 动画库，如 Animate.css 综合使用十分有用。
+        同时使用过渡和动画
 -->
 <div id="demo1">
     <button v-on:click="show = !show">
@@ -53,6 +59,21 @@
     </transition>
 </div>
 
+<br>
+
+<div id="css-demo3">
+    <button @click="show = !show">
+        Toggle render
+    </button>
+    <transition
+            name="custom-classes-transition"
+            enter-active-class="animated tada"
+            leave-active-class="animated bounceOutRight"
+    >
+        <p v-if="show">hello</p>
+    </transition>
+</div>
+
 <script type="text/javascript">
     new Vue({
         el: '#demo1',
@@ -70,6 +91,13 @@
 
     new Vue({
         el: '#css-demo2',
+        data: {
+            show: true
+        }
+    })
+
+    new Vue({
+        el: '#css-demo3',
         data: {
             show: true
         }
