@@ -41,6 +41,29 @@
     </footer>
 </div>
 
+<br>
+
+<!--
+    作用域插槽
+        独占默认插槽的缩写语法
+        解构插槽 Prop
+    动态插槽名
+    具名插槽的缩写
+    其他示例
+        插槽 prop 允许我们将插槽转换为可复用的模板，这些模板可以基于输入的 prop 渲染出不同的内容。
+        这在设计封装数据逻辑同时允许父级组件自定义部分布局的可复用组件时是最有用的。
+    废弃了的语法
+        带有 slot attribute 的具名插槽
+        带有 slot-scope attribute 的作用域插槽
+-->
+<div id="function-slot">
+    <span>
+        <slot v-bind:user="user">
+            {{ user.lastName }}
+        </slot>
+    </span>
+</div>
+
 <script type="text/javascript">
 
 </script>
