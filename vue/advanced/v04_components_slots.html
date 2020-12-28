@@ -7,8 +7,39 @@
 </head>
 
 <body>
-<!-- 插槽 -->
+<!--
+    插槽
+        插槽内容
+        编译作用域
+            规则：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。
 
+        具名插槽
+-->
+
+<!-- 后备内容（默认内容） -->
+<div>
+    <button type="submit">
+        <slot>Submit</slot>
+    </button>
+</div>
+
+<br>
+
+<!-- 具名插槽 -->
+<div class="container">
+    <header>
+        <!-- 我们希望把页头放这里 -->
+        <slot name="header"></slot>
+    </header>
+    <main>
+        <!-- 我们希望把主要内容放这里 -->
+        <slot></slot>
+    </main>
+    <footer>
+        <!-- 我们希望把页脚放这里 -->
+        <slot name="footer"></slot>
+    </footer>
+</div>
 
 <script type="text/javascript">
 
