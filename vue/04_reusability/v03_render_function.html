@@ -11,6 +11,31 @@
     渲染函数 & JSX
         基础
             需要 JavaScript 的完全编程能力，可以用渲染函数
+        节点、树以及虚拟 DOM
+            虚拟 DOM
+                Vu额 通过建立一个虚拟 DOM 来追踪自己要如何改变真实 DOM。
+        createElement 参数
+            深入数据对象
+            完整示例
+            约束
+                VNode 必须唯一
+        使用 JavaScript 代替模板功能
+            v-if 和 v-for
+            v-model
+            事件 & 按键修饰符
+                .passive -> &, .capture -> !, .once -> ~, .capture.once or .once.capture -> ~!
+            插槽
+        JSX
+            将 h 作为 createElement 的别名是 Vue 生态系统中的一个通用惯例，实际上也是 JSX 所要求的。
+        函数式组件
+            可以将组件标记为 functional，这意味着它无状态（没有响应式数据），也没有实例（没有 this 上下文）。
+            组件需要的一切都是通过 context 参数传递，它是一个包括如下字段的对象：
+            props, children, slots, scopedSlots, data, parent, listeners, injections.
+            向子元素或子组件传递 attribute 和事件
+                在普通组件中，没有被定义为 prop 的 attribute 会自动添加到组件的根目录上，将已有的同名 attribute 进行替换
+                或与其进行智能合并。然而函数式组件要求你显式定义该行为。
+            slots() 和 children 对比
+        模板编译
 -->
 
 <h1>
